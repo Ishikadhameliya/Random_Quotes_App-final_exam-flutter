@@ -21,19 +21,19 @@ class _SplashScreenState extends State<SplashScreen> {
     '"It is during our darkest moments that we must focus to see the light."',
   ];
   List color = [
-    Colors.blue,
-    Colors.deepOrange,
-    Colors.pinkAccent,
-    Colors.purpleAccent,
-    Colors.deepPurpleAccent,
-    Colors.brown,
-    Colors.yellow,
-    Colors.tealAccent,
+    Colors.blue.shade100,
+    Colors.deepOrange.shade100,
+    Colors.pinkAccent.shade100,
+    Colors.purpleAccent.shade100,
+    Colors.deepPurpleAccent.shade100,
+    Colors.brown.shade100,
+    Colors.yellow.shade100,
+    Colors.tealAccent.shade100,
   ];
   @override
   void initState() {
     super.initState();
-    Duration duration = const Duration(seconds: 5);
+    Duration duration = const Duration(seconds:5);
     Timer(duration, () {
       Navigator.of(context).pushReplacementNamed('/');
     });
@@ -55,13 +55,13 @@ class _SplashScreenState extends State<SplashScreen> {
             Text(
               textAlign: TextAlign.center,
               "${quotes.first}",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 40),
             Spacer(),
             Text(
               "Life Quotes",
-              style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
           ],
         ),
