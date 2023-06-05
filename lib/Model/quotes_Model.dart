@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 JokeModel jokeModelFromJson(String str) => JokeModel.fromJson(json.decode(str));
@@ -22,25 +21,21 @@ class JokeModel {
   String url;
   String value;
 
-  factory JokeModel.fromJson(Map<String,dynamic>json) => JokeModel(
-      categories: List<dynamic>.from(json["categories"].map((e)=>e)),
-      created_at: DateTime.parse(json["created_at"]),
-      id: json["id"],
-      updated_at: DateTime.parse(json["updated_at"]),
-      url: json["url"],
-      value: json["value"],
-  );
+  factory JokeModel.fromJson(Map<String, dynamic> json) => JokeModel(
+        categories: List<dynamic>.from(json["categories"].map((e) => e)),
+        created_at: DateTime.parse(json["created_at"]),
+        id: json["id"],
+        updated_at: DateTime.parse(json["updated_at"]),
+        url: json["url"],
+        value: json["value"],
+      );
 
-  Map<String,dynamic> toJson() => {
-    "categories" :List<dynamic>.from(categories.map((e) => e)),
-    "created_at" : created_at.toIso8601String(),
-    "id" : id,
-    "updated_at" : updated_at.toIso8601String(),
-    "url" : url,
-    "value" : value,
-
-
-  };
+  Map<String, dynamic> toJson() => {
+        "categories": List<dynamic>.from(categories.map((e) => e)),
+        "created_at": created_at.toIso8601String(),
+        "id": id,
+        "updated_at": updated_at.toIso8601String(),
+        "url": url,
+        "value": value,
+      };
 }
-
-
