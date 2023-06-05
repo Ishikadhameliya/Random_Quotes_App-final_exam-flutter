@@ -1,37 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:random_quotes_app/screens/home_page.dart';
-import 'package:random_quotes_app/screens/splash_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:random_quotes_app/views/screen/home_page.dart';
+import 'package:random_quotes_app/views/screen/intro_screen/first_intro_page.dart';
+import 'package:random_quotes_app/views/screen/intro_screen/second_intro_page.dart';
+import 'package:random_quotes_app/views/screen/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'Model/themeodel.dart';
+import 'cantroller/quotes_controller.dart';
+import 'cantroller/theme_provider.dart';
 
-import 'intoScreen/first.dart';
-import 'intoScreen/second.dart';
-
-void main() async {
+void main()async{
   WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences preferences = await SharedPreferences.getInstance();
 
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-
-  bool? isFirstVisited = prefs.getBool('firstVisited') ?? false;
-  bool? isSecondVisited = prefs.getBool('secondVisited') ?? false;
+  bool isdark = preferences.getBool('isdark') ?? false;
   runApp(
-    MaterialApp(
-      theme: (
-      ThemeData(
-        useMaterial3: true,
-      )
-      ),
-      debugShowCheckedModeBanner: false,
-      initialRoute: (isFirstVisited == false)
-          ? 'first'
-          : (isSecondVisited == true)
-              ? 'splash'
-              : 'second',
-      routes: {
-        'splash': (context) => const SplashScreen(),
-        'first': (context) => const First(),
-        'second': (context) => const Second(),
-        '/': (context) => const HomePage(),
-       },
-    ),
+      MultiProvider(providers: [
+        ChangeNotifierProvider(create: (context)=> ThemeProvider(themeModel:ThemeModel(isDarkMode:isdark ))),
+        ChangeNotifierProvider<JokeController>(create:(_)=>JokeController())
+      ],
+        builder: (context,_){return  MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData.light(),
+          darkTheme: ThemeData.dark(),
+          themeMode: (Provider.of<ThemeProvider>(context).themeModel.isDarkMode == false)
+              ? ThemeMode.light
+              : ThemeMode.dark,
+          initialRoute: 'first_intro_page',
+          routes: {
+            '/' : (context) => const Homepage(),
+            'splash_screen' : (context) => const SplashScreen(),
+            'first_intro_page' : (context) => const First(),
+            'second_intro_page' : (context) => const Second(),
+          },
+        );},)
   );
 }

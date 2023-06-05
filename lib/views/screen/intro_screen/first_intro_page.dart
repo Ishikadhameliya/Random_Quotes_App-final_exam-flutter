@@ -1,14 +1,14 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
-class Second extends StatefulWidget {
-  const Second({Key? key}) : super(key: key);
+class First extends StatefulWidget {
+  const First({Key? key}) : super(key: key);
 
   @override
-  State<Second> createState() => _SecondState();
+  State<First> createState() => _FirstState();
 }
 
-class _SecondState extends State<Second> {
+class _FirstState extends State<First> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,20 +19,17 @@ class _SecondState extends State<Second> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Spacer(),
-            Image.asset("assets/images/second.jpg"),
+            Image.asset("assets/images/first.jpg"),
             Spacer(),
             ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                    20,
-                  )),
+                  shape: StadiumBorder(),
                 ),
                 onPressed: () async {
                   SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
-                  await prefs.setBool('secondVisited', true);
-                  Navigator.of(context).pushReplacementNamed('splash');
+                  await SharedPreferences.getInstance();
+                  await prefs.setBool('firstVisited', true);
+                  Navigator.of(context).pushReplacementNamed('second_intro_page');
                 },
                 child: Text(" NEXT "))
           ],
